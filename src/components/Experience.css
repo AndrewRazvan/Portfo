@@ -9,7 +9,7 @@
   
   .experience-section h2 {
     font-size: 2.5rem;
-    color: #000;
+    color: #007bff;
     text-align: center;
     margin-bottom: 30px;
     position: relative;
@@ -58,14 +58,14 @@
   .experience-box h3,
   .education-box h3 {
     font-size: 1.8rem;
-    color: #007bff;
+    color: #000000;
     margin-bottom: 15px;
     transition: color 0.3s ease;
   }
   
   .experience-box h3:hover,
   .education-box h3:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #000000; /* Darker blue on hover */
   }
   
   /* Items Inside Boxes */

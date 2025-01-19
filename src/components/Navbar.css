@@ -1,75 +1,94 @@
 .navbar {
-  position: fixed;
-  top: 10px; /* Add some space from the top */
-  left: 10px; /* Add some space from the left */
-  width: calc(100% - 20px); /* Adjust width to account for the space on both sides */
-  z-index: 1000;
-  background-color: #333;
+  position: fixed; /* Keeps the navbar in a fixed position */
+  top: 8%; /* Vertically center the navbar */
+  left: 50%; /* Horizontally center the navbar */
+  transform: translate(-50%, -50%); /* Center the navbar completely */
+  width: calc(100% - 40px); /* Adjust width to account for side spacing */
+  max-width: 1200px; /* Optional: Limit the width on larger screens */
+  background-color: #333; /* Dark background */
   color: white;
-  max-width: 1850px; /* Optional: Set a maximum width */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 10px;
-  border: 8px solid #cac9c9; /* Add a lighter color for the border */
-  border-radius: 15px; /* Make the border slightly roundish */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-@media (max-width: 768px) {
-  .navbar {
-    width: calc(100% - 20px); /* Reduce width on smaller screens */
-    padding: 15px 10px; /* Adjust padding */
-  }
+  padding: 20px 30px; /* Add padding for thickness */
+  border: 5px solid #cac9c9; /* Add a lighter border */
+  border-radius: 15px; /* Round the corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transitions */
+  z-index: 1000;
 }
 
-/* Visible state */
+/* Navbar visible state */
 .navbar.visible {
-  transform: translateY(0); /* Navbar is fully visible */
+  transform: translate(-50%, -50%); /* Fully visible and centered */
   opacity: 1;
 }
 
-/* Hidden state */
+/* Navbar hidden state */
 .navbar.hidden {
-  transform: translateY(-100%); /* Navbar slides up and hides */
+  transform: translate(-50%, -150%); /* Hidden by sliding up and centered */
   opacity: 0;
 }
 
 /* Logo styles */
 .logo {
-  font-size: 28px;
+  font-size: 32px; /* Larger logo size */
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
   color: white;
-}
-
-.logo:link,
-.logo:visited {
-  color: white;
-  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth hover effect */
 }
 
 .logo:hover {
   text-decoration: underline;
 }
 
-/* Navigation link styles */
+/* Navigation links */
 .nav-links {
   display: flex;
   list-style-type: none;
-}
-
-.nav-item {
-  margin: 0 15px;
+  gap: 20px; /* Space between links */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
 }
 
 .nav-link {
-  color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 18px; /* Standard font size */
+  font-weight: 600; /* Slightly bolder for readability */
+  color: white; /* White text for contrast */
+  padding: 10px 15px; /* Add padding for clickable area */
+  border-radius: 8px; /* Smooth edges */
+  transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover and transform */
+  background: transparent; /* Ensure no background color is set */
 }
 
+/* Hover effect */
 .nav-link:hover {
-  text-decoration: underline;
+  color: #007bff; /* Highlight text on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+  background: none; /* Explicitly remove background */
+}
+
+/* Active link styling */
+.nav-link.active {
+  color: #007bff; /* Highlight active link */
+  font-weight: 700; /* Slightly bolder */
+  background: none; /* Ensure no background on active */
+}
+
+/* Responsive design for links */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Center-align links */
+    gap: 15px; /* Add more space between links */
+  }
+
+  .nav-link {
+    font-size: 16px; /* Smaller font size for mobile */
+    width: 100%; /* Full width for easier clicking */
+    text-align: center; /* Center the text */
+  }
 }

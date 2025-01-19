@@ -11,12 +11,12 @@ const Hero = () => {
     en: {
       downloadCV: "Download CV (English)",
       cvLink: "/cv-english.pdf",
-      intro: "Hello there! I am Andrew Ungureanu, a software engineer student enrolled in a Co-op program at Concordia University. I am passionate about web development and building innovative applications that solve real-world challenges. On this website, you'll find projects I have created throughout my career as a developer.",
+      intro: "Hi! I’m Andrew Ungureanu, a software engineering student in the Co-op program at Concordia University and a proud member of the Concordia Stingers men’s varsity soccer team. I have a strong passion for developement and enjoy creating innovative applications that address real-world problems. This website showcases some of the projects I’ve worked on throughout my journey as a developer.",
     },
     fr: {
       downloadCV: "Télécharger le CV (Français)",
       cvLink: "/cv-french.pdf",
-      intro: "Bonjour! Je suis Andrew Ungureanu, un étudiant en génie logiciel inscrit au programme coopératif de l'Université Concordia. Je suis passionné par le développement web et la création d'applications innovantes qui répondent à des défis du monde réel. Sur ce site, vous trouverez des projets que j'ai réalisés au cours de ma carrière de développeur.",
+      intro: "Salut ! Je m’appelle Andrew Ungureanu, étudiant en génie logiciel dans le programme Co-op de l’Université Concordia et fier membre de l’équipe masculine de soccer varsity des Concordia Stingers. Je suis passionné par le développement et j’aime créer des applications innovantes qui répondent à des problèmes concrets. Ce site présente certains des projets sur lesquels j’ai travaillé tout au long de mon parcours en tant que développeur.",
     },
   };
 

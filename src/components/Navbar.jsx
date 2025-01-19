@@ -19,6 +19,13 @@ const Navbar = () => {
     setLastScrollY(currentScrollY); // Update the last scroll position
   };
 
+  const handleSmoothScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
@@ -29,12 +36,46 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isVisible ? "visible" : "hidden"}`}>
-      <a href="#hero" className="logo">Andrew Ungureanu</a>
+      <a
+        onClick={() => handleSmoothScroll("hero")}
+        className="logo"
+        style={{ cursor: "pointer" }}
+      >
+        Andrew Ungureanu
+      </a>
       <ul className="nav-links">
-        <li className="nav-item"><a href="#experience" className="nav-link">Experience</a></li>
-        <li className="nav-item"><a href="#projects" className="nav-link">Projects</a></li>
-        <li className="nav-item"><a href="#skills" className="nav-link">Skills</a></li>
-        <li className="nav-item"><a href="#contactme" className="nav-link">Contact Me</a></li>
+        <li className="nav-item">
+          <button
+            onClick={() => handleSmoothScroll("experience")}
+            className="nav-link"
+          >
+            Experience
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            onClick={() => handleSmoothScroll("projects")}
+            className="nav-link"
+          >
+            Projects
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            onClick={() => handleSmoothScroll("skills")}
+            className="nav-link"
+          >
+            Skills
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            onClick={() => handleSmoothScroll("contactme")}
+            className="nav-link"
+          >
+            Contact Me
+          </button>
+        </li>
       </ul>
     </nav>
   );
