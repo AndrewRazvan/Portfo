@@ -1,0 +1,75 @@
+.navbar {
+  position: fixed;
+  top: 10px; /* Add some space from the top */
+  left: 10px; /* Add some space from the left */
+  width: calc(100% - 20px); /* Adjust width to account for the space on both sides */
+  z-index: 1000;
+  background-color: #333;
+  color: white;
+  max-width: 1850px; /* Optional: Set a maximum width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 10px;
+  border: 8px solid #cac9c9; /* Add a lighter color for the border */
+  border-radius: 15px; /* Make the border slightly roundish */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+@media (max-width: 768px) {
+  .navbar {
+    width: calc(100% - 20px); /* Reduce width on smaller screens */
+    padding: 15px 10px; /* Adjust padding */
+  }
+}
+
+/* Visible state */
+.navbar.visible {
+  transform: translateY(0); /* Navbar is fully visible */
+  opacity: 1;
+}
+
+/* Hidden state */
+.navbar.hidden {
+  transform: translateY(-100%); /* Navbar slides up and hides */
+  opacity: 0;
+}
+
+/* Logo styles */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: white;
+}
+
+.logo:link,
+.logo:visited {
+  color: white;
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: underline;
+}
+
+/* Navigation link styles */
+.nav-links {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
