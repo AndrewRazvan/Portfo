@@ -146,32 +146,6 @@ const projects = [
   },
 ];
 
-const hackathons = [
-  {
-    id: "conuhacks-viii",
-    title: "FitnessCheck AI",
-    event: "ConUHacks VIII",
-    links: {
-      demo: "https://www.youtube.com/watch?v=P1QSf3GHF8o",
-      devpost: "https://devpost.com/software/fitnesscheck-ai",
-    },
-    en: { description: "Real-time exercise form tracking with OpenCV and MediaPipe." },
-    fr: { description: "Suivi en temps réel de la posture d’exercice avec OpenCV et MediaPipe." },
-  },
-  {
-    id: "polyhacks-2024",
-    title: "Safe & Sound",
-    event: "PolyHacks 2024",
-    links: {
-      code: "https://github.com/AndrewRazvan/PolyHacks2024",
-      demo: "https://www.youtube.com/watch?v=Q5OLDDagAJg",
-      devpost: "https://devpost.com/software/safe-and-sound-zms5nj",
-    },
-    en: { description: "Sound level monitor that warns about unsafe noise exposure." },
-    fr: { description: "Moniteur de niveau sonore qui avertit en cas d’exposition à un bruit dangereux." },
-  },
-];
-
 // Items are a plain string when the name is the same in both languages
 const skills = [
   { id: "languages", en: "Languages", fr: "Langages", items: ["Java", "C#", "TypeScript", "JavaScript", "Python", "HTML", "CSS"] },
@@ -255,7 +229,6 @@ const ui = {
       },
     },
     current: "Current",
-    hackathonsTitle: "Earlier hackathons",
     links: { code: "Code", demo: "Demo", devpost: "Devpost" },
     education: {
       school: "Concordia University",
@@ -315,7 +288,6 @@ const ui = {
       },
     },
     current: "En cours",
-    hackathonsTitle: "Hackathons précédents",
     links: { code: "Code", demo: "Démo", devpost: "Devpost" },
     education: {
       school: "Université Concordia",
@@ -348,7 +320,6 @@ export const getContent = (lang) => ({
   ...ui[lang],
   experience: experience.map(({ en, fr, ...rest }) => ({ ...rest, ...(lang === "fr" ? fr : en) })),
   projects: projects.map(({ en, fr, ...rest }) => ({ ...rest, ...(lang === "fr" ? fr : en) })),
-  hackathons: hackathons.map(({ en, fr, ...rest }) => ({ ...rest, ...(lang === "fr" ? fr : en) })),
   skills: skills.map(({ id, en, fr, items }) => ({
     id,
     label: lang === "fr" ? fr : en,

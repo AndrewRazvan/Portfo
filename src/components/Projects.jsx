@@ -71,24 +71,6 @@ const Projects = () => {
             </article>
           ))}
         </div>
-
-        <div className="hackathons reveal">
-          <h3 className="hackathons-title mono">{t.hackathonsTitle}</h3>
-          <ul className="hackathon-list">
-            {t.hackathons.map((hack) => (
-              <li key={hack.id} className="hackathon">
-                <div className="hackathon-text">
-                  <p className="hackathon-name">
-                    {hack.title}
-                    <span className="hackathon-event mono">{hack.event}</span>
-                  </p>
-                  <p className="hackathon-description">{hack.description}</p>
-                </div>
-                <ProjectLinks links={hack.links} title={hack.title} />
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
