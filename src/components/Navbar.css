@@ -1,94 +1,181 @@
 .navbar {
-  position: fixed; /* Keeps the navbar in a fixed position */
-  top: 8%; /* Vertically center the navbar */
-  left: 50%; /* Horizontally center the navbar */
-  transform: translate(-50%, -50%); /* Center the navbar completely */
-  width: calc(100% - 40px); /* Adjust width to account for side spacing */
-  max-width: 1200px; /* Optional: Limit the width on larger screens */
-  background-color: #333; /* Dark background */
-  color: white;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease);
+}
+
+/* Solid backdrop once content scrolls underneath */
+.navbar.scrolled {
+  background-color: rgba(11, 17, 32, 0.85);
+  border-bottom-color: var(--color-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 30px; /* Add padding for thickness */
-  border: 5px solid #cac9c9; /* Add a lighter border */
-  border-radius: 15px; /* Round the corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transitions */
-  z-index: 1000;
+  justify-content: space-between;
+  height: var(--nav-height);
 }
 
-/* Navbar visible state */
-.navbar.visible {
-  transform: translate(-50%, -50%); /* Fully visible and centered */
-  opacity: 1;
-}
-
-/* Navbar hidden state */
-.navbar.hidden {
-  transform: translate(-50%, -150%); /* Hidden by sliding up and centered */
-  opacity: 0;
-}
-
-/* Logo styles */
 .logo {
-  font-size: 32px; /* Larger logo size */
-  font-weight: bold;
-  font-family: "Poppins", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--color-foreground);
   text-decoration: none;
-  color: white;
-  transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth hover effect */
 }
 
-.logo:hover {
-  text-decoration: underline;
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-accent);
 }
 
-/* Navigation links */
+.logo-name {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .nav-links {
   display: flex;
-  list-style-type: none;
-  gap: 20px; /* Space between links */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  gap: 2px;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 18px; /* Standard font size */
-  font-weight: 600; /* Slightly bolder for readability */
-  color: white; /* White text for contrast */
-  padding: 10px 15px; /* Add padding for clickable area */
-  border-radius: 8px; /* Smooth edges */
-  transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover and transform */
-  background: transparent; /* Ensure no background color is set */
+  transition: color var(--duration) var(--ease);
 }
 
-/* Hover effect */
 .nav-link:hover {
-  color: #007bff; /* Highlight text on hover */
-  transform: translateY(-2px); /* Slight lift on hover */
-  background: none; /* Explicitly remove background */
+  color: var(--color-foreground);
 }
 
-/* Active link styling */
+/* Section currently in view */
 .nav-link.active {
-  color: #007bff; /* Highlight active link */
-  font-weight: 700; /* Slightly bolder */
-  background: none; /* Ensure no background on active */
+  color: var(--color-accent);
 }
 
-/* Responsive design for links */
-@media (max-width: 768px) {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* EN / FR segmented switch */
+.lang-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.lang-option {
+  min-width: 44px;
+  min-height: 40px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.lang-option:hover {
+  color: var(--color-foreground);
+}
+
+.lang-option[aria-pressed="true"] {
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+/* Hamburger button, only shown on small screens */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-foreground);
+  font-size: 1.125rem;
+}
+
+@media (max-width: 960px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 12px 16px 20px;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
   .nav-links {
-    flex-direction: column; /* Stack links vertically */
-    align-items: center; /* Center-align links */
-    gap: 15px; /* Add more space between links */
+    flex-direction: column;
   }
 
   .nav-link {
-    font-size: 16px; /* Smaller font size for mobile */
-    width: 100%; /* Full width for easier clicking */
-    text-align: center; /* Center the text */
+    width: 100%;
+    padding: 0 8px;
+    font-size: 1rem;
+  }
+
+  .nav-actions {
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .lang-option {
+    min-height: 44px;
+    min-width: 52px;
   }
 }

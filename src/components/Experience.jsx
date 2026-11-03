@@ -1,51 +1,58 @@
-import React from "react";
+import { useLang } from "../i18n/LangContext";
+import SectionHeader from "./SectionHeader";
+import hydroQuebecLogo from "../assets/logos/hydro-quebec.svg";
+import desjardinsLogo from "../assets/logos/desjardins.svg";
 import "./Experience.css";
 
+// Company marks, keyed by experience id
+const logos = {
+  "hydro-quebec": hydroQuebecLogo,
+  desjardins: desjardinsLogo,
+};
+
 const Experience = () => {
+  const { t } = useLang();
+
   return (
-    <section id="experience" className="experience-section">
-      <h2>Experience</h2>
-      <div className="experience-container">
-        {/* Work Experience Box */}
-        <div className="experience-box">
-          <h3>Work Experience</h3>
-          <div className="experience-item">
-            <h4>Technologies and Operations Intern</h4>
-            <p>Desjardins, Montreal, Quebec</p>
-            <p className="experience-duration">Sept 2024 - Dec 2024</p>
-            <ul>
-              <li>
-                <strong>Automated data transfer</strong> from <strong>Excel</strong> to <strong>BlueMatrix</strong>, improving efficiency and reducing manual errors.
-              </li>
-              <li>
-                <strong>Automated data transfer</strong> from <strong>MySQL</strong> to <strong>PowerBI</strong>, improving efficiency and reducing manual errors.
-              </li>
-              <li>
-                <strong>Cleaned and corrected</strong> critical internal databases, enhancing data accuracy and reliability.
-              </li>
-              <li>
-                <strong>Performed various administrative tasks</strong> to support the Capital Markets team and streamline daily operations.
-              </li>
-            </ul>
+    <section id="experience" className="section">
+      <div className="container">
+        <SectionHeader index="01" {...t.sections.experience} />
 
-          </div>
-        </div>
-
-        {/* Education Box */}
-        <div className="education-box">
-          <h3>Education</h3>
-          <div className="education-item">
-            <h4>Bachelor of Engineering – Software Engineering Co-op</h4>
-            <p>Concordia University, Montreal, QC</p>
-            <p className="education-duration">Sept 2023 - May 2027</p>
-            <ul>
-              <li>Member of the Institute for Co-operative Education</li>
-              <li>
-                Relevant Courses: Data Structure and Algorithms, Object Oriented Programming (Java I & II), Web Development, Principle of Programming Languages
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ol className="timeline">
+          {t.experience.map((job) => (
+            <li key={job.id} className={`timeline-item reveal ${job.current ? "current" : ""}`}>
+              <article className="card job">
+                <header className="job-header">
+                  <span className="job-logo">
+                    {/* Decorative: the company name is right beside it */}
+                    <img src={logos[job.id]} alt="" width="32" height="32" />
+                  </span>
+                  <div className="job-title">
+                    <h3>{job.role}</h3>
+                    <p className="job-company">
+                      {job.company}
+                      <span className="job-location"> · {job.location}</span>
+                    </p>
+                  </div>
+                  <p className="job-dates mono">
+                    {job.current && <span className="job-badge">{t.current}</span>}
+                    {job.dates}
+                  </p>
+                </header>
+                <ul className="job-bullets">
+                  {job.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+                <ul className="tag-list" aria-label="Technologies">
+                  {job.tags.map((tag) => (
+                    <li key={tag} className="tag">{tag}</li>
+                  ))}
+                </ul>
+              </article>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

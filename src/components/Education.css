@@ -1,0 +1,80 @@
+.education-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.education-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-accent-soft);
+  font-size: 1.375rem;
+  color: var(--color-accent);
+}
+
+.education-heading h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.education-degree {
+  margin-top: 4px;
+  color: var(--color-text);
+}
+
+.education-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.education-bullets {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.education-bullets li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.education-bullets li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+.education-courses-title {
+  margin-bottom: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 640px) {
+  .education-header {
+    grid-template-columns: auto 1fr;
+  }
+
+  .education-dates {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+}

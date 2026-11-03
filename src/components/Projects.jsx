@@ -1,74 +1,97 @@
-import React from "react";
+import { FaGithub, FaYoutube, FaTrophy } from "react-icons/fa";
+import { SiDevpost } from "react-icons/si";
+import { useLang } from "../i18n/LangContext";
+import SectionHeader from "./SectionHeader";
 import "./Projects.css";
-import { FaGithub, FaYoutube, FaDev } from "react-icons/fa"; // Install react-icons if not already done
 
-const projects = [
-  {
-    title: "ConUHacks VIII",
-    description:
-      "Developed a fitness tracking tool using Python, OpenCV, and MediaPipe to assist users in maintaining proper exercise form with real-time video analysis.",
-    youtubeLink: "https://www.youtube.com/watch?v=P1QSf3GHF8o",
-    devpostLink: "https://devpost.com/software/fitnesscheck-ai",
-  },
-  {
-    title: "Hand Sign Alphabet Recognition System",
-    description:
-      "Designed a machine learning model with TensorFlow to recognize hand sign alphabets, enhancing accessibility for hearing-impaired individuals.",
-    githubLink: "https://github.com/AndrewRazvan/PolyHacks",
-  },
-  {
-    title: "PolyHacks 2024",
-    description:
-      "Created a sound level monitoring app using Python and PyAudio to alert users of unsafe noise exposure, promoting hearing health.",
-    githubLink: "https://github.com/AndrewRazvan/PolyHacks",
-    youtubeLink: "https://www.youtube.com/watch?v=Q5OLDDagAJg",
-    devpostLink: "https://devpost.com/software/safe-and-sound-zms5nj",
-  },
-];
+const linkIcons = { code: FaGithub, demo: FaYoutube, devpost: SiDevpost };
 
-const ProjectsSection = () => {
+// Labelled Code / Demo / Devpost links; renders nothing when a project has none
+const ProjectLinks = ({ links, title }) => {
+  const { t } = useLang();
+  const entries = Object.entries(links);
+  if (entries.length === 0) return null;
+
   return (
-    <section id="projects" className="projects-section">
-      <h2>Projects</h2>
-      <div className="projects-container">
-        {projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="project-icons">
-              {project.githubLink && (
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub className="project-icon" />
-                </a>
-              )}
-              {project.youtubeLink && (
-                <a
-                  href={project.youtubeLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaYoutube className="project-icon" />
-                </a>
-              )}
-              {project.devpostLink && (
-                <a
-                  href={project.devpostLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaDev className="project-icon" />
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
+    <ul className="link-list">
+      {entries.map(([kind, href]) => {
+        const Icon = linkIcons[kind];
+        return (
+          <li key={kind}>
+            <a
+              href={href}
+              className="link-pill"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.links[kind]}: ${title}`}
+            >
+              <Icon aria-hidden="true" />
+              {t.links[kind]}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const Projects = () => {
+  const { t } = useLang();
+
+  return (
+    <section id="projects" className="section">
+      <div className="container">
+        <SectionHeader index="02" {...t.sections.projects} />
+
+        <div className="projects-grid">
+          {t.projects.map((project, index) => (
+            <article
+              key={project.id}
+              className={`card project-card reveal ${project.featured ? "featured" : ""}`}
+              style={{ transitionDelay: `${index * 50}ms` }}
+            >
+              <div className="project-meta">
+                <span className="mono">{project.dates}</span>
+                {project.award && (
+                  <span className="project-award">
+                    <FaTrophy aria-hidden="true" />
+                    {project.award}
+                  </span>
+                )}
+              </div>
+              <h3>{project.title}</h3>
+              <p className="project-subtitle">{project.subtitle}</p>
+              <p className="project-description">{project.description}</p>
+              <ul className="tag-list" aria-label="Technologies">
+                {project.tags.map((tag) => (
+                  <li key={tag} className="tag">{tag}</li>
+                ))}
+              </ul>
+              <ProjectLinks links={project.links} title={project.title} />
+            </article>
+          ))}
+        </div>
+
+        <div className="hackathons reveal">
+          <h3 className="hackathons-title mono">{t.hackathonsTitle}</h3>
+          <ul className="hackathon-list">
+            {t.hackathons.map((hack) => (
+              <li key={hack.id} className="hackathon">
+                <div className="hackathon-text">
+                  <p className="hackathon-name">
+                    {hack.title}
+                    <span className="hackathon-event mono">{hack.event}</span>
+                  </p>
+                  <p className="hackathon-description">{hack.description}</p>
+                </div>
+                <ProjectLinks links={hack.links} title={hack.title} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
 };
 
-export default ProjectsSection;
+export default Projects;

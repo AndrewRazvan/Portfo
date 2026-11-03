@@ -1,124 +1,159 @@
-/* General Styling for the Experience Section */
-.experience-section {
-    padding: 50px 20px;
-    background-color: #f9f9f9;
-    color: #333;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+/* Vertical timeline: a rail on the left with one node per job */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 0 0 0 32px;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 7px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent), var(--color-border) 40%);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  left: -32px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border-strong);
+  border-radius: 50%;
+  background-color: var(--color-background);
+}
+
+.timeline-item.current::before {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+/* Logo | role + company | dates */
+.job-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* White tile so each brand mark keeps its official colours */
+.job-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-logo-tile);
+}
+
+.job-logo img {
+  display: block;
+  width: 34px;
+  height: 34px;
+}
+
+.job h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.job-company {
+  margin-top: 4px;
+  font-weight: 500;
+  color: var(--color-foreground);
+}
+
+.job-location {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.job-dates {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.job-badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+  font-size: 0.75rem;
+  color: var(--color-accent);
+}
+
+.job-bullets {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.job-bullets li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.job-bullets li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 24px;
   }
-  
-  .experience-section h2 {
-    font-size: 2.5rem;
-    color: #007bff;
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
+
+  .timeline::before {
+    left: 5px;
   }
-  
-  .experience-section h2::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: #007bff;
-    margin: 10px auto 0;
-    border-radius: 2px;
+
+  .timeline-item::before {
+    left: -24px;
+    width: 12px;
+    height: 12px;
+    top: 28px;
   }
-  
-  /* Container Styling */
-  .experience-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap; /* Ensures responsiveness for smaller screens */
+
+  .job-header {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px 14px;
   }
-  
-  /* Box Styling */
-  .experience-box,
-  .education-box {
-    flex: 1 1 45%; /* Allows boxes to shrink and wrap on smaller screens */
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 500px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Dynamic transition */
+
+  .job-logo {
+    width: 44px;
+    height: 44px;
   }
-  
-  .experience-box:hover,
-  .education-box:hover {
-    transform: translateY(-10px); /* Slight lift on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-    border-color: #007bff; /* Highlighted border color on hover */
+
+  .job-logo img {
+    width: 28px;
+    height: 28px;
   }
-  
-  /* Box Headers */
-  .experience-box h3,
-  .education-box h3 {
-    font-size: 1.8rem;
-    color: #000000;
-    margin-bottom: 15px;
-    transition: color 0.3s ease;
+
+  .job-dates {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    white-space: normal;
   }
-  
-  .experience-box h3:hover,
-  .education-box h3:hover {
-    color: #000000; /* Darker blue on hover */
-  }
-  
-  /* Items Inside Boxes */
-  .experience-item h4,
-  .education-item h4 {
-    font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .experience-duration,
-  .education-duration {
-    font-size: 1rem;
-    color: #555;
-    font-style: italic;
-    margin-bottom: 10px;
-  }
-  
-  /* List Styling */
-  ul {
-    margin: 0;
-    padding-left: 20px;
-    list-style-type: disc;
-  }
-  
-  ul li {
-    margin-bottom: 10px;
-  }
-  
-  .skills {
-    margin-top: 10px;
-    font-style: italic;
-    color: #555;
-  }
-  
-  /* Responsive Styling */
-  @media screen and (max-width: 768px) {
-    .experience-container {
-      flex-direction: column; /* Stacks boxes vertically on small screens */
-      align-items: center;
-    }
-  
-    .experience-box,
-    .education-box {
-      flex: 1 1 100%; /* Full width for smaller screens */
-      max-width: 100%;
-    }
-  }
-  
-  /* Additional Transition Effects for Responsiveness */
-  @media (prefers-reduced-motion: no-preference) {
-    .experience-box,
-    .education-box {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-  }
+}

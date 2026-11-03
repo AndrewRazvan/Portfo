@@ -1,99 +1,102 @@
-import React from "react";
-import "./Skills.css";
+import { FaJava } from "react-icons/fa";
+import { TbBrandCSharp, TbBrandAzure } from "react-icons/tb";
 import {
-  FaJava,
-  FaPython,
-  FaHtml5,
-  FaCss3Alt,
-  FaReact,
-  FaNodeJs,
-  FaGithub,
-} from "react-icons/fa";
-import { SiJavascript, SiC, SiTensorflow, SiMysql, SiGit } from "react-icons/si";
+  SiTypescript,
+  SiJavascript,
+  SiPython,
+  SiHtml5,
+  SiCss3,
+  SiTensorflow,
+  SiReact,
+  SiSpringboot,
+  SiNodedotjs,
+  SiExpress,
+  SiAndroid,
+  SiPostgresql,
+  SiMysql,
+  SiMongodb,
+  SiDocker,
+  SiTerraform,
+  SiApachepulsar,
+  SiGit,
+  SiGithub,
+  SiGitlab,
+  SiJira,
+  SiConfluence,
+  SiLinux,
+  SiJest,
+} from "react-icons/si";
+import { useLang } from "../i18n/LangContext";
+import SectionHeader from "./SectionHeader";
+import "./Skills.css";
 
-const SkillsSection = () => {
+// Brand icon + brand colour per skill (keyed by the English name). Colours are
+// nudged lighter where the official one disappears on the dark background.
+// Skills without an entry render as text-only chips.
+const skillIcons = {
+  Java: [FaJava, "#f89820"],
+  "C#": [TbBrandCSharp, "#b57edc"],
+  TypeScript: [SiTypescript, "#3178c6"],
+  JavaScript: [SiJavascript, "#f7df1e"],
+  Python: [SiPython, "#ffd43b"],
+  HTML: [SiHtml5, "#e34f26"],
+  CSS: [SiCss3, "#2d8cf0"],
+  TensorFlow: [SiTensorflow, "#ff6f00"],
+  React: [SiReact, "#61dafb"],
+  "React Native": [SiReact, "#61dafb"],
+  "Spring Boot": [SiSpringboot, "#6db33f"],
+  "Node.js": [SiNodedotjs, "#5fa04e"],
+  Express: [SiExpress, "var(--color-text-muted)"],
+  Android: [SiAndroid, "#3ddc84"],
+  PostgreSQL: [SiPostgresql, "#6b8fe8"],
+  MySQL: [SiMysql, "#5d9bc9"],
+  MongoDB: [SiMongodb, "#47a248"],
+  Azure: [TbBrandAzure, "#0089d6"],
+  Docker: [SiDocker, "#2496ed"],
+  Terraform: [SiTerraform, "#9b6fd6"],
+  Pulsar: [SiApachepulsar, "#188fff"],
+  Git: [SiGit, "#f05032"],
+  GitHub: [SiGithub, "var(--color-foreground)"],
+  GitLab: [SiGitlab, "#fc6d26"],
+  Jira: [SiJira, "#2684ff"],
+  Confluence: [SiConfluence, "#2684ff"],
+  Linux: [SiLinux, "var(--color-foreground)"],
+  Jest: [SiJest, "#e0485d"],
+};
+
+const Skills = () => {
+  const { t } = useLang();
+
   return (
-    <section id="skills" className="skills-section">
-      <h2>My Skills</h2>
-      <div className="skills-container">
-        {/* Languages */}
-        <div className="skills-category">
-          <h3>Languages</h3>
-          <div className="skills-list">
-            <div className="skill-item">
-              <FaJava className="skill-icon" />
-              <span>Java</span>
-            </div>
-            <div className="skill-item">
-              <FaPython className="skill-icon" />
-              <span>Python</span>
-            </div>
-            <div className="skill-item">
-              <SiJavascript className="skill-icon" />
-              <span>JavaScript</span>
-            </div>
-            <div className="skill-item">
-              <SiC className="skill-icon" />
-              <span>C</span>
-            </div>
-            <div className="skill-item">
-              <FaHtml5 className="skill-icon" />
-              <span>HTML</span>
-            </div>
-            <div className="skill-item">
-              <FaCss3Alt className="skill-icon" />
-              <span>CSS</span>
-            </div>
-          </div>
-        </div>
+    <section id="skills" className="section">
+      <div className="container">
+        <SectionHeader index="03" {...t.sections.skills} />
 
-        {/* Frameworks & Libraries */}
-        <div className="skills-category">
-          <h3>Frameworks & Libraries</h3>
-          <div className="skills-list">
-            <div className="skill-item">
-              <FaReact className="skill-icon" />
-              <span>React</span>
+        <div className="skills-grid">
+          {t.skills.map((group, index) => (
+            <div
+              key={group.id}
+              className="card skills-card reveal"
+              style={{ transitionDelay: `${(index % 3) * 50}ms` }}
+            >
+              <h3>{group.label}</h3>
+              <ul className="skill-chips">
+                {group.items.map((item) => {
+                  const [Icon, color] = skillIcons[item.id] ?? [];
+                  return (
+                    <li key={item.id} className="skill-chip">
+                      {Icon && <Icon className="skill-chip-icon" style={{ color }} aria-hidden="true" />}
+                      {item.label}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-            <div className="skill-item">
-              <SiTensorflow className="skill-icon" />
-              <span>TensorFlow</span>
-            </div>
-            <div className="skill-item">
-              <FaNodeJs className="skill-icon" />
-              <span>Node.js</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Database */}
-        <div className="skills-category">
-          <h3>Database</h3>
-          <div className="skills-list">
-            <div className="skill-item">
-              <SiMysql className="skill-icon" />
-              <span>SQL</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Version Control */}
-        <div className="skills-category">
-          <h3>Version Control</h3>
-          <div className="skills-list">
-            <div className="skill-item">
-              <SiGit className="skill-icon" />
-              <span>Git</span>
-            </div>
-            <div className="skill-item">
-              <FaGithub className="skill-icon" />
-              <span>GitHub</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default SkillsSection;
+export default Skills;

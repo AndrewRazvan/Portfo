@@ -1,17 +1,233 @@
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Section styles for better visibility */
+/* Keep section headings clear of the fixed navbar */
 section {
-  padding: 100px 20px;
-  min-height: 50vh; /* Make each section full screen height */
-  border-bottom: 1px solid #ddd;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
-section h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-  text-align: center;
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Shared section layout */
+.section {
+  padding: 96px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.section-header {
+  margin-bottom: 48px;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-accent);
+}
+
+.section-eyebrow-index {
+  color: var(--color-text-muted);
+}
+
+.section-header h2 {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.section-lead {
+  margin-top: 16px;
+  max-width: 56ch;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
+/* Shared card surface */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: border-color var(--duration) var(--ease), background-color var(--duration) var(--ease);
+}
+
+.card:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Monospace tags */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-text);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease), transform 150ms var(--ease);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--color-border-strong);
+  color: var(--color-foreground);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-foreground);
+  background-color: var(--color-muted);
+}
+
+.btn-sm {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 0.9375rem;
+}
+
+/* Labelled link pills (Code / Demo / Devpost) */
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.link-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Scroll reveal, toggled from App.jsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: var(--z-skip);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+main:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn:active {
+    transform: none;
+  }
 }
